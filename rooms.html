@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Apartment | AY BANKY APARTMENTS</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    body {
+      line-height: 1.6;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff5a5f;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    nav ul li {
+      margin-left: 1.5rem;
+      position: relative;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #ff5a5f;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff5a5f;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .rooms-hero {
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('./images/Outside.jpeg') center/cover no-repeat;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .rooms-hero-content {
+      max-width: 800px;
+      padding: 2rem;
+    }
+    .rooms-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: slideUp 0.8s ease-out;
+    }
+    .rooms-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      animation: slideUp 0.8s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+    @keyframes slideUp {
+      from { 
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Apartment Info Section */
+    .apartment-info {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .apartment-info:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    .apartment-info h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .apartment-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: #ff5a5f;
+    }
+    .apartment-info p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .amenities-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .amenities-list li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      padding: 0.8rem;
+      background: #f9f9f9;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .amenities-list li:hover {
+      background: #ff5a5f;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 90, 95, 0.3);
+    }
+    .amenities-list li:hover::before {
+      color: white;
+    }
+    .amenities-list li::before {
+      content: "★";
+      margin-right: 10px;
+      color: #ff5a5f;
+      font-size: 1.2rem;
+    }
+    .pricing {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    .pricing p {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .pricing strong {
+      color: #ff5a5f;
+    }
+    .book-now-btn {
+      display: inline-block;
+      background: #ff5a5f;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 90, 95, 0.3);
+    }
+    .book-now-btn:hover {
+      background: #e04a50;
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 90, 95, 0.4);
+    }
+
+    /* Gallery Section */
+    .gallery-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .gallery-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      color: #333;
+      position: relative;
+    }
+    .gallery-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #ff5a5f;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .lightbox-img {
+      max-height: 80vh;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0,0,0,0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+    .lightbox-close:hover {
+      background: #ff5a5f;
+      transform: rotate(90deg);
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0,0,0,0.5);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+    .lightbox-nav:hover {
+      background: #ff5a5f;
+    }
+    .lightbox-prev {
+      left: 20px;
+    }
+    .lightbox-next {
+      right: 20px;
+    }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.2rem;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 15px;
+      border-radius: 20px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background: #333;
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 3rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #ff5a5f;
+    }
+    .footer-column p {
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      background: #ff5a5f;
+      transform: translateY(-3px);
+    }
+    .footer-column ul {
+      list-style: none;
+    }
+    .footer-column ul li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.8;
+    }
+    .footer-column ul li i {
+      color: #ff5a5f;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .rooms-hero h1 {
+        font-size: 2.2rem;
+      }
+      .apartment-info {
+        padding: 1.5rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      nav ul li {
+        margin: 0.5rem 0;
+      }
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">AY BANKY APARTMENTS</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Apartment</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="rooms-hero">
+    <div class="rooms-hero-content">
+      <h1>Luxury 2-Bedroom Apartment</h1>
+      <p>Experience premium comfort in the heart of Isheri OPIC</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="apartment-info">
+      <h2>Apartment Details</h2>
+      <p>Our spacious 2-bedroom apartment offers premium comfort for 1-4 guests, featuring modern amenities and elegant decor in the prime location of Wisdom Estate.</p>
+      
+      <h3>Amenities</h3>
+      <ul class="amenities-list">
+        <li>2 Bedrooms</li>
+        <li>2 Bathrooms</li>
+        <li>Fully Equipped Kitchen</li>
+        <li>Living Room</li>
+        <li>24/7 Security</li>
+        <li>Free WiFi</li>
+        <li>Air Conditioning</li>
+        <li>Smart TV</li>
+        <li>Dinning space</li>
+        <li>Parking Space</li>
+        <li>Daily Cleaning</li>
+        <li>Room Service</li>
+      </ul>
+      
+      <div class="pricing">
+        <p><strong>Price:</strong> ₦120,000/night</p>
+        <p><strong>Caution fees:</strong> ₦100,000 (refundable)</p>
+      
+      </div>
+      
+      <a href="booking.html" class="book-now-btn">Book Now <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <section class="gallery-container">
+      <h2 class="gallery-title">Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-index="1">
+          <img src="./images/Outside.jpeg" alt="Apartment Exterior">
+        </div>
+        <div class="gallery-item" data-index="2">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.42 AM (1).jpeg" alt="Living Room">
+        </div>
+        <div class="gallery-item" data-index="3">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.42 AM (2).jpeg" alt="Living Room">
+        </div>
+        <div class="gallery-item" data-index="4">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.42 AM.jpeg" alt="Dinning Space">
+        </div>
+        <div class="gallery-item" data-index="5">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.43 AM (1).jpeg" alt="Kitchen">
+        </div>
+        <div class="gallery-item" data-index="6">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.43 AM (2).jpeg" alt="Kitchen">
+        </div>
+        <div class="gallery-item" data-index="7">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.43 AM (3).jpeg" alt="Kitchen">
+        </div>
+        <div class="gallery-item" data-index="8">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.43 AM (4).jpeg" alt="Dinning Space">
+        </div>
+        <div class="gallery-item" data-index="9">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.43 AM.jpeg" alt="Dinning Table">
+        </div>
+        <div class="gallery-item" data-index="10">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.44 AM (1).jpeg" alt="Bathrooms">
+        </div>
+        <div class="gallery-item" data-index="11">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.44 AM (2).jpeg" alt="Bedroom">
+        </div>
+        <div class="gallery-item" data-index="12">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.44 AM (3).jpeg" alt="Bedroom">
+        </div>
+        <div class="gallery-item" data-index="13">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.44 AM (4).jpeg" alt="Bedroom">
+        </div>
+        <div class="gallery-item" data-index="14">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.44 AM.jpeg" alt="Bathroom">
+        </div>
+        <div class="gallery-item" data-index="15">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.45 AM (1).jpeg" alt="Bedroom">
+        </div>
+        <div class="gallery-item" data-index="16">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.45 AM (2).jpeg" alt="Bedroom">
+        </div>
+        <div class="gallery-item" data-index="17">
+          <img src="./images/WhatsApp Image 2025-03-27 at 8.12.45 AM.jpeg" alt="Bedroom">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="">
+      <div class="lightbox-counter"></div>
+    </div>
+    <div class="lightbox-nav lightbox-prev">&#10094;</div>
+    <div class="lightbox-nav lightbox-next">&#10095;</div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>AY BANKY APARTMENTS</h3>
+          <p>Providing luxury apartment rentals in Isheri OPIC with premium amenities and exceptional service.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Apartments</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Plot 41, Alajoke Odubona Wisdom Estate, Isheri OPIC</li>
+            <li><i class="fas fa-phone"></i> +234 803 786 3503</li>
+            <li><i class="fas fa-envelope"></i> azeezol547@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2024 AY BANKY APARTMENTS. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all elements
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const lightbox = document.querySelector('.lightbox');
+      const lightboxImg = document.querySelector('.lightbox-img');
+      const lightboxClose = document.querySelector('.lightbox-close');
+      const lightboxPrev = document.querySelector('.lightbox-prev');
+      const lightboxNext = document.querySelector('.lightbox-next');
+      const lightboxCounter = document.querySelector('.lightbox-counter');
+      
+      let currentIndex = 0;
+      let slideInterval;
+      
+      // Get ACTUAL image paths from the HTML elements
+      const imagePaths = Array.from(galleryItems).map(item => {
+        return item.querySelector('img').src;
+      });
+      const totalImages = imagePaths.length;
+      
+      // Open lightbox and start slideshow
+      function openLightbox(index) {
+        if (index < 0 || index >= totalImages) return;
+        
+        currentIndex = index;
+        updateLightboxImage();
+        lightbox.classList.add('active');
+        startSlideshow();
+      }
+      
+      // Update lightbox image
+      function updateLightboxImage() {
+        lightboxImg.src = imagePaths[currentIndex];
+        lightboxCounter.textContent = `${currentIndex + 1}/${totalImages}`;
+      }
+      
+      // Start auto slideshow
+      function startSlideshow() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+          nextImage();
+        }, 2000); // Change image every 2 seconds
+      }
+      
+      // Navigate to next image
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateLightboxImage();
+      }
+      
+      // Navigate to previous image
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateLightboxImage();
+      }
+      
+      // Event listeners
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          openLightbox(index);
+        });
+      });
+      
+      lightboxClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        lightbox.classList.remove('active');
+        clearInterval(slideInterval);
+      });
+      
+      lightboxPrev.addEventListener('click', function(e) {
+        e.stopPropagation();
+        prevImage();
+        startSlideshow();
+      });
+      
+      lightboxNext.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nextImage();
+        startSlideshow();
+      });
+      
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+          clearInterval(slideInterval);
+        }
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+          lightbox.classList.remove('active');
+          clearInterval(slideInterval);
+        } else if (e.key === 'ArrowLeft') {
+          prevImage();
+          startSlideshow();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
+          startSlideshow();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

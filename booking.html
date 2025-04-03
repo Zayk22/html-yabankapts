@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Stay | AY BANKY APARTMENTS</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    body {
+      line-height: 1.6;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff5a5f;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    nav ul li {
+      margin-left: 1.5rem;
+      position: relative;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #ff5a5f;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff5a5f;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .booking-hero {
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('../images/booking-hero.jpg') center/cover no-repeat;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .booking-hero-content {
+      max-width: 800px;
+      padding: 2rem;
+    }
+    .booking-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: slideUp 0.8s ease-out;
+    }
+    .booking-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      animation: slideUp 0.8s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+    @keyframes slideUp {
+      from { 
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Booking Form Styles */
+    .booking-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      animation: fadeIn 1s ease-in-out 0.3s forwards;
+      opacity: 0;
+    }
+    .booking-form {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .booking-form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .form-header h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    .form-header p {
+      color: #666;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #555;
+      transition: color 0.3s ease;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: #f9f9f9;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ff5a5f;
+      box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.2);
+      background-color: white;
+    }
+    .form-group input:hover,
+    .form-group select:hover {
+      border-color: #bbb;
+    }
+    .form-group::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ff5a5f;
+      transition: width 0.3s ease;
+    }
+    .form-group:focus-within::after {
+      width: 100%;
+    }
+    .submit-btn {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+    .submit-btn button {
+      background: #ff5a5f;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(255, 90, 95, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .submit-btn button:hover {
+      background: #e04a50;
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 90, 95, 0.4);
+    }
+    .submit-btn button:active {
+      transform: translateY(1px);
+    }
+    .submit-btn button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    .submit-btn button:hover::before {
+      left: 100%;
+    }
+
+    /* Booking Features */
+    .booking-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #ff5a5f;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .feature-card p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Footer Styles */
+    footer {
+      background: #333;
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 3rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #ff5a5f;
+    }
+    .footer-column p {
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      background: #ff5a5f;
+      transform: translateY(-3px);
+    }
+    .footer-column ul {
+      list-style: none;
+    }
+    .footer-column ul li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.8;
+    }
+    .footer-column ul li i {
+      color: #ff5a5f;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .booking-hero h1 {
+        font-size: 2.2rem;
+      }
+      .booking-form {
+        padding: 1.5rem;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      nav ul li {
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">AY BANKY APARTMENTS</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Apartment</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="booking-hero">
+    <div class="booking-hero-content">
+      <h1>Book Your Stay</h1>
+      <p>Experience luxury living in our premium 2-bedroom apartment</p>
+    </div>
+  </section>
+
+  <div class="booking-container">
+    <form class="booking-form" id="bookingForm">
+      <div class="form-header">
+        <h2><i class="fas fa-calendar-alt"></i> Reservation Details</h2>
+        <p>Fill out the form below to book your stay</p>
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="checkin">Check-in Date</label>
+          <input type="date" id="checkin" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="checkout">Check-out Date</label>
+          <input type="date" id="checkout" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <select id="guests" required>
+            <option value="" disabled selected>Select guests</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required placeholder="Your full name">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="Your email address">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" required placeholder="Your phone number">
+        </div>
+        
+        <div class="form-group">
+          <label for="special">Special Requests</label>
+          <textarea id="special" rows="3" placeholder="Any special requests?"></textarea>
+        </div>
+        
+        <div class="submit-btn">
+          <button type="submit">Confirm Booking <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <div class="booking-features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <h3>Luxury Accommodation</h3>
+        <p>Spacious 2-bedroom apartment with modern amenities and stylish decor</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Prime Location</h3>
+        <p>Located in the heart of Wisdom Estate with easy access to major attractions</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Secure Environment</h3>
+        <p>24/7 security and CCTV surveillance for your peace of mind</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Added Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>AY BANKY APARTMENTS</h3>
+          <p>Providing luxury apartment rentals in Isheri OPIC with premium amenities and exceptional service.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Apartments</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Plot 41, Alajoke Odubona Wisdom Estate, Isheri OPIC</li>
+            <li><i class="fas fa-phone"></i> +234 803 786 3503</li>
+            <li><i class="fas fa-envelope"></i> azeezol547@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2024 AY BANKY APARTMENTS. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('bookingForm');
+      
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading animation
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+        
+        // Simulate form processing
+        setTimeout(function() {
+          // Show success message
+          alert('Booking request received! We will contact you shortly to confirm your reservation.');
+          form.reset();
+          
+          // Reset button
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 1500);
+      });
+      
+      // Date input enhancements
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('checkin').min = today;
+      
+      document.getElementById('checkin').addEventListener('change', function() {
+        document.getElementById('checkout').min = this.value;
+      });
+    });
+  </script>
+</body>
+</html>
